@@ -83,11 +83,11 @@ function App() {
               Grupo RaVal
             </div>
 
-            <ul className="hidden md:flex items-center space-x-4">
+            <ul className="hidden md:flex items-center space-x-8">
               <li>
                 <button
                   onClick={() => scrollToSection("inicio")}
-                  className="bg-primary text-primary-foreground hover:bg-accent hover:text-accent-foreground hover:scale-110 transition-all duration-300 font-medium px-5 py-2 rounded-md min-w-[90px] text-center"
+                  className="text-foreground hover:text-primary transition-colors font-medium"
                 >
                   Início
                 </button>
@@ -95,7 +95,7 @@ function App() {
               <li>
                 <button
                   onClick={() => scrollToSection("software")}
-                  className="bg-primary text-primary-foreground hover:bg-accent hover:text-accent-foreground hover:scale-110 transition-all duration-300 font-medium px-5 py-2 rounded-md min-w-[90px] text-center"
+                  className="text-foreground hover:text-primary transition-colors font-medium"
                 >
                   Software
                 </button>
@@ -103,7 +103,7 @@ function App() {
               <li>
                 <button
                   onClick={() => scrollToSection("design")}
-                  className="bg-primary text-primary-foreground hover:bg-accent hover:text-accent-foreground hover:scale-110 transition-all duration-300 font-medium px-5 py-2 rounded-md min-w-[90px] text-center"
+                  className="text-foreground hover:text-primary transition-colors font-medium"
                 >
                   Design
                 </button>
@@ -111,15 +111,15 @@ function App() {
               <li>
                 <button
                   onClick={() => scrollToSection("personalizacao")}
-                  className="bg-primary text-primary-foreground hover:bg-accent hover:text-accent-foreground hover:scale-110 transition-all duration-300 font-medium px-5 py-2 rounded-md min-w-[90px] text-center"
+                  className="text-foreground hover:text-primary transition-colors font-medium"
                 >
-                  Produtos
+                  Personalização
                 </button>
               </li>
               <li>
                 <button
                   onClick={() => scrollToSection("sinalizacao")}
-                  className="bg-primary text-primary-foreground hover:bg-accent hover:text-accent-foreground hover:scale-110 transition-all duration-300 font-medium px-5 py-2 rounded-md min-w-[90px] text-center"
+                  className="text-foreground hover:text-primary transition-colors font-medium"
                 >
                   Sinalização
                 </button>
@@ -127,7 +127,7 @@ function App() {
               <li>
                 <Button
                   onClick={() => scrollToSection("contato")}
-                  className="bg-primary hover:bg-accent hover:text-accent-foreground hover:scale-110 transition-all duration-300 text-primary-foreground px-5 py-2 rounded-md min-w-[90px] text-center"
+                  className="bg-primary hover:bg-primary/90 text-primary-foreground px-6"
                 >
                   Contato
                 </Button>
@@ -161,9 +161,17 @@ function App() {
                   <Button
                     size="lg"
                     onClick={() => scrollToSection("contato")}
-                    className="bg-accent hover:bg-accent/90 text-accent-foreground px-8 h-12 text-base"
+                    className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 h-12 text-base"
                   >
                     Solicitar Orçamento
+                  </Button>
+                  <Button
+                    size="lg"
+                    variant="outline"
+                    onClick={() => scrollToSection("software")}
+                    className="border-primary text-primary hover:bg-primary/5 px-8 h-12 text-base"
+                  >
+                    Conhecer Serviços
                   </Button>
                 </div>
               </div>
@@ -178,7 +186,7 @@ function App() {
                     </p>
                   </Card>
                   <Card className="p-6 hover:shadow-lg transition-all hover:-translate-y-1">
-                    <PaintBrush size={32} weight="duotone" className="text-accent mb-3" />
+                    <PaintBrush size={32} weight="duotone" className="text-primary mb-3" />
                     <h3 className="font-semibold mb-2">Design</h3>
                     <p className="text-sm text-muted-foreground">
                       Identidade visual completa
@@ -192,10 +200,10 @@ function App() {
                     </p>
                   </Card>
                   <Card className="p-6 hover:shadow-lg transition-all hover:-translate-y-1">
-                    <Signpost size={32} weight="duotone" className="text-accent mb-3" />
-                    <h3 className="font-semibold mb-2">Acrílico</h3>
+                    <Signpost size={32} weight="duotone" className="text-primary mb-3" />
+                    <h3 className="font-semibold mb-2">Sinalização</h3>
                     <p className="text-sm text-muted-foreground">
-                      Placas qr code e Cartões de visita
+                      Comunicação visual eficaz
                     </p>
                   </Card>
                 </div>
@@ -355,7 +363,7 @@ function App() {
                     </li>
                     <li className="flex items-start gap-3">
                       <span className="text-primary font-bold">✓</span>
-                      <span>Material impresso (cartões de visitas, flyers, catálogos)</span>
+                      <span>Material impresso (cartões, flyers, catálogos)</span>
                     </li>
                     <li className="flex items-start gap-3">
                       <span className="text-primary font-bold">✓</span>
@@ -428,8 +436,8 @@ function App() {
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-              <Card className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-2 hover:border-primary/20 bg-gradient-to-br from-background to-primary/5 h-full flex flex-col">
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+              <Card className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-2 hover:border-primary/20 bg-gradient-to-br from-background to-primary/5">
                 <CardHeader>
                   <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
                     <TShirt size={24} weight="duotone" className="text-primary" />
@@ -439,15 +447,11 @@ function App() {
                     Uniformes e roupas personalizadas
                   </CardDescription>
                 </CardHeader>
-                <CardContent className="flex-grow">
+                <CardContent>
                   <ul className="space-y-2 text-sm">
                     <li className="flex items-start gap-2">
                       <span className="text-primary font-bold">•</span>
                       <span>Camisetas e polos</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="text-primary font-bold">•</span>
-                      <span>Camisas e bermudas</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="text-primary font-bold">•</span>
@@ -465,7 +469,7 @@ function App() {
                 </CardContent>
               </Card>
 
-              <Card className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-2 hover:border-primary/20 bg-gradient-to-br from-background to-primary/5 h-full flex flex-col">
+              <Card className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-2 hover:border-primary/20 bg-gradient-to-br from-background to-primary/5">
                 <CardHeader>
                   <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
                     <Coffee size={24} weight="duotone" className="text-primary" />
@@ -475,7 +479,7 @@ function App() {
                     Produtos promocionais personalizados
                   </CardDescription>
                 </CardHeader>
-                <CardContent className="flex-grow">
+                <CardContent>
                   <ul className="space-y-2 text-sm">
                     <li className="flex items-start gap-2">
                       <span className="text-primary font-bold">•</span>
@@ -497,41 +501,65 @@ function App() {
                 </CardContent>
               </Card>
 
-              <Card className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-2 hover:border-accent/20 bg-gradient-to-br from-background to-accent/5 h-full flex flex-col">
+              <Card className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-2 hover:border-primary/20 bg-gradient-to-br from-background to-primary/5">
                 <CardHeader>
-                  <div className="w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center mb-4 group-hover:bg-accent/20 transition-colors">
-                    <ShareNetwork size={24} weight="duotone" className="text-accent" />
+                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
+                    <Tag size={24} weight="duotone" className="text-primary" />
                   </div>
-                  <CardTitle className="text-xl">Acrílicos Premium</CardTitle>
+                  <CardTitle className="text-xl">Impressos</CardTitle>
                   <CardDescription className="text-base">
-                    Tecnologia QR Code & NFC
+                    Material promocional impresso
                   </CardDescription>
                 </CardHeader>
-                <CardContent className="flex-grow">
+                <CardContent>
                   <ul className="space-y-2 text-sm">
                     <li className="flex items-start gap-2">
-                      <span className="text-accent font-bold">•</span>
-                      <span>Placas de QR Code personalizadas</span>
+                      <span className="text-primary font-bold">•</span>
+                      <span>Adesivos e etiquetas</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <span className="text-accent font-bold">•</span>
-                      <span>Tags de Acrílico personalizadas</span>
+                      <span className="text-primary font-bold">•</span>
+                      <span>Banners e faixas</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <span className="text-accent font-bold">•</span>
-                      <span>Cartões de visita com NFC</span>
+                      <span className="text-primary font-bold">•</span>
+                      <span>Cartões de visita</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <span className="text-accent font-bold">•</span>
-                      <span>QR Code integrado com website</span>
+                      <span className="text-primary font-bold">•</span>
+                      <span>Folders e panfletos</span>
+                    </li>
+                  </ul>
+                </CardContent>
+              </Card>
+
+              <Card className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-2 hover:border-primary/20 bg-gradient-to-br from-background to-primary/5">
+                <CardHeader>
+                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
+                    <IdentificationCard size={24} weight="duotone" className="text-primary" />
+                  </div>
+                  <CardTitle className="text-xl">Corporativo</CardTitle>
+                  <CardDescription className="text-base">
+                    Itens para escritório e eventos
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <ul className="space-y-2 text-sm">
+                    <li className="flex items-start gap-2">
+                      <span className="text-primary font-bold">•</span>
+                      <span>Placas e totens</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <span className="text-accent font-bold">•</span>
-                      <span>Impressão de alta durabilidade</span>
+                      <span className="text-primary font-bold">•</span>
+                      <span>Troféus e medalhas</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <span className="text-accent font-bold">•</span>
-                      <span>Design personalizado e exclusivo</span>
+                      <span className="text-primary font-bold">•</span>
+                      <span>Canetas e cadernos</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-primary font-bold">•</span>
+                      <span>Material de escritório</span>
                     </li>
                   </ul>
                 </CardContent>
@@ -551,7 +579,7 @@ function App() {
                 Sinalização
               </h2>
               <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-                Placas de QR code e cartões de visita para orientar, informar e promover.
+                Comunicação visual eficiente para orientar, informar e promover.
                 Desde projetos simples até sistemas complexos de sinalização.
               </p>
             </div>
@@ -588,18 +616,18 @@ function App() {
                     <CardHeader>
                       <CardTitle className="text-xl">Sinalização Externa</CardTitle>
                       <CardDescription>
-                        Placas e cartões de visitas para comunicação visual
+                        Comunicação visual para área externa
                       </CardDescription>
                     </CardHeader>
                     <CardContent>
                       <ul className="space-y-2 text-sm">
                         <li className="flex items-start gap-3">
                           <span className="text-primary font-bold">✓</span>
-                          <span>Placas em Metal</span>
+                          <span>Letreiros e fachadas</span>
                         </li>
                         <li className="flex items-start gap-3">
                           <span className="text-primary font-bold">✓</span>
-                          <span>Identificação em portas externas</span>
+                          <span>Totens e outdoors</span>
                         </li>
                         <li className="flex items-start gap-3">
                           <span className="text-primary font-bold">✓</span>
@@ -791,13 +819,13 @@ function App() {
 
               <div className="text-center">
                 <div className="flex flex-wrap justify-center gap-4">
-                  <Badge variant="accent" className="text-sm px-4 py-2">
+                  <Badge variant="secondary" className="text-sm px-4 py-2">
                     Orçamento Gratuito
                   </Badge>
                   <Badge variant="secondary" className="text-sm px-4 py-2">
                     Entrega Rápida
                   </Badge>
-                  <Badge variant="accent" className="text-sm px-4 py-2">
+                  <Badge variant="secondary" className="text-sm px-4 py-2">
                     Suporte Técnico
                   </Badge>
                   <Badge variant="secondary" className="text-sm px-4 py-2">
