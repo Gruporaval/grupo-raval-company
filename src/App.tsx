@@ -5,6 +5,9 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
+import videoCard from "@/assets/videos/videocard.mp4";
+import videoPlayback from "@/assets/videos/videoplayback.mp4";
+import { useEffect, useState } from "react";
 import {
   Code,
   PaintBrush,
@@ -18,7 +21,6 @@ import {
   Phone,
   MapPin,
 } from "@phosphor-icons/react";
-import { useState } from "react";
 import { toast } from "sonner";
 
 interface FormData {
@@ -37,6 +39,56 @@ function App() {
     empresa: "",
     mensagem: "",
   });
+
+  // Efeito para animação sequencial dos cards
+  useEffect(() => {
+    const observerOptions = {
+      threshold: 0.3,
+      rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && entry.target.id === 'software-cards') {
+          // Animar cards sequencialmente com delays maiores
+          setTimeout(() => {
+            const card1 = document.getElementById('card-1');
+            if (card1) {
+              card1.classList.remove('card-hidden');
+              card1.classList.add('card-animate-1');
+            }
+          }, 300);
+
+          setTimeout(() => {
+            const card2 = document.getElementById('card-2');
+            if (card2) {
+              card2.classList.remove('card-hidden');
+              card2.classList.add('card-animate-2');
+            }
+          }, 1500); // Aumentado de 500 para 1500
+
+          setTimeout(() => {
+            const card3 = document.getElementById('card-3');
+            if (card3) {
+              card3.classList.remove('card-hidden');
+              card3.classList.add('card-animate-3');
+            }
+          }, 2700); // Aumentado de 900 para 2700
+
+          // Para de observar após a primeira animação
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    // Observar a seção de software
+    const softwareSection = document.getElementById('software-cards');
+    if (softwareSection) {
+      observer.observe(softwareSection);
+    }
+
+    return () => observer.disconnect();
+  }, []);
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -220,97 +272,100 @@ function App() {
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              <Card className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-2 hover:border-primary/20 bg-gradient-to-br from-background to-primary/5">
-                <CardHeader>
-                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
-                    <Code size={24} weight="duotone" className="text-primary" />
+            <div id="software-cards" className="grid md:grid-cols-2 lg:grid-cols-3 gap-8" style={{ perspective: '1000px' }}>
+              <Card id="card-1" className="card-hidden group bg-gradient-to-br from-accent via-primary to-black transform-gpu hover:rotateX-12 hover:rotateY-12 shadow-2xl hover:shadow-4xl" style={{ transformStyle: 'preserve-3d', boxShadow: '0 20px 40px rgba(0,0,0,0.3), 0 0 20px rgba(59, 130, 246, 0.5)' }}>
+                <div className="absolute inset-0 bg-gradient-to-br from-accent/20 via-primary/20 to-black/20 rounded-lg" style={{ transform: 'translateZ(-10px)' }}></div>
+                <CardHeader className="relative z-10">
+                  <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-white/20 to-white/5 backdrop-blur-sm flex items-center justify-center mb-4 group-hover:rotateY-180 transition-transform duration-700 shadow-lg">
+                    <Code size={24} weight="duotone" className="text-white drop-shadow-lg" />
                   </div>
-                  <CardTitle className="text-xl">Sistemas Web</CardTitle>
-                  <CardDescription className="text-base">
+                  <CardTitle className="text-xl text-white drop-shadow-lg font-bold tracking-wide">Sistemas Web</CardTitle>
+                  <CardDescription className="text-base text-white/90 drop-shadow-md">
                     Aplicações web modernas e responsivas para gestão empresarial
                   </CardDescription>
                 </CardHeader>
-                <CardContent>
-                  <ul className="space-y-3 text-sm">
+                <CardContent className="relative z-10 transform group-hover:translateZ-10 transition-transform duration-500">
+                  <ul className="space-y-3 text-sm text-white">
                     <li className="flex items-start gap-3">
-                      <span className="text-primary font-bold">✓</span>
+                      <span className="text-accent font-bold">✓</span>
                       <span>ERPs e CRMs personalizados</span>
                     </li>
                     <li className="flex items-start gap-3">
-                      <span className="text-primary font-bold">✓</span>
+                      <span className="text-accent font-bold">✓</span>
                       <span>E-commerce completo</span>
                     </li>
                     <li className="flex items-start gap-3">
-                      <span className="text-primary font-bold">✓</span>
+                      <span className="text-accent font-bold">✓</span>
                       <span>Dashboards e relatórios</span>
                     </li>
                     <li className="flex items-start gap-3">
-                      <span className="text-primary font-bold">✓</span>
+                      <span className="text-accent font-bold">✓</span>
                       <span>Integração com APIs</span>
                     </li>
                   </ul>
                 </CardContent>
               </Card>
 
-              <Card className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-2 hover:border-primary/20 bg-gradient-to-br from-background to-primary/5">
-                <CardHeader>
-                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
-                    <Code size={24} weight="duotone" className="text-primary" />
+              <Card id="card-2" className="card-hidden group bg-gradient-to-br from-green-600 via-black to-primary transform-gpu hover:rotateX--12 hover:rotateY--12 shadow-2xl hover:shadow-4xl" style={{ transformStyle: 'preserve-3d', boxShadow: '0 20px 40px rgba(0,0,0,0.3), 0 0 20px rgba(34, 197, 94, 0.5)' }}>
+                <div className="absolute inset-0 bg-gradient-to-br from-green-600/20 via-black/20 to-primary/20 rounded-lg" style={{ transform: 'translateZ(-10px)' }}></div>
+                <CardHeader className="relative z-10">
+                  <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-white/20 to-white/5 backdrop-blur-sm flex items-center justify-center mb-4 group-hover:rotateX-180 transition-transform duration-700 shadow-lg">
+                    <Code size={24} weight="duotone" className="text-white drop-shadow-lg" />
                   </div>
-                  <CardTitle className="text-xl">Apps Mobile</CardTitle>
-                  <CardDescription className="text-base">
+                  <CardTitle className="text-xl text-white drop-shadow-lg font-bold tracking-wide">Apps Mobile</CardTitle>
+                  <CardDescription className="text-base text-white/90 drop-shadow-md">
                     Aplicativos nativos para iOS e Android
                   </CardDescription>
                 </CardHeader>
-                <CardContent>
-                  <ul className="space-y-3 text-sm">
+                <CardContent className="relative z-10 transform group-hover:translateZ-10 transition-transform duration-500">
+                  <ul className="space-y-3 text-sm text-white">
                     <li className="flex items-start gap-3">
-                      <span className="text-primary font-bold">✓</span>
+                      <span className="text-green-400 font-bold">✓</span>
                       <span>Interface intuitiva</span>
                     </li>
                     <li className="flex items-start gap-3">
-                      <span className="text-primary font-bold">✓</span>
+                      <span className="text-green-400 font-bold">✓</span>
                       <span>Performance otimizada</span>
                     </li>
                     <li className="flex items-start gap-3">
-                      <span className="text-primary font-bold">✓</span>
+                      <span className="text-green-400 font-bold">✓</span>
                       <span>Sincronização offline</span>
                     </li>
                     <li className="flex items-start gap-3">
-                      <span className="text-primary font-bold">✓</span>
+                      <span className="text-green-400 font-bold">✓</span>
                       <span>Push notifications</span>
                     </li>
                   </ul>
                 </CardContent>
               </Card>
 
-              <Card className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-2 hover:border-primary/20 bg-gradient-to-br from-background to-primary/5 md:col-span-2 lg:col-span-1">
-                <CardHeader>
-                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
-                    <Code size={24} weight="duotone" className="text-primary" />
+              <Card id="card-3" className="card-hidden group bg-gradient-to-br from-primary via-accent to-green-600 md:col-span-2 lg:col-span-1 transform-gpu hover:rotateY-15 hover:rotateX-8 shadow-2xl hover:shadow-4xl" style={{ transformStyle: 'preserve-3d', boxShadow: '0 25px 50px rgba(0,0,0,0.4), 0 0 30px rgba(249, 115, 22, 0.6)' }}>
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-accent/20 to-green-600/20 rounded-lg" style={{ transform: 'translateZ(-15px)' }}></div>
+                <CardHeader className="relative z-10">
+                  <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-white/30 to-white/10 backdrop-blur-sm flex items-center justify-center mb-4 group-hover:rotateZ-360 transition-transform duration-1000 shadow-xl">
+                    <Code size={24} weight="duotone" className="text-white drop-shadow-xl" />
                   </div>
-                  <CardTitle className="text-xl">Automação</CardTitle>
-                  <CardDescription className="text-base">
+                  <CardTitle className="text-xl text-white drop-shadow-lg font-bold tracking-wide">Automação</CardTitle>
+                  <CardDescription className="text-base text-white/90 drop-shadow-md">
                     Scripts e sistemas para automatizar tarefas repetitivas
                   </CardDescription>
                 </CardHeader>
-                <CardContent>
-                  <ul className="space-y-3 text-sm">
+                <CardContent className="relative z-10 transform group-hover:translateZ-15 transition-transform duration-500">
+                  <ul className="space-y-3 text-sm text-white group-hover:text-black transition-colors duration-300">
                     <li className="flex items-start gap-3">
-                      <span className="text-primary font-bold">✓</span>
+                      <span className="text-black font-bold group-hover:text-white transition-colors duration-300">✓</span>
                       <span>RPA e bots</span>
                     </li>
                     <li className="flex items-start gap-3">
-                      <span className="text-primary font-bold">✓</span>
+                      <span className="text-black font-bold group-hover:text-white transition-colors duration-300">✓</span>
                       <span>Integração de sistemas</span>
                     </li>
                     <li className="flex items-start gap-3">
-                      <span className="text-primary font-bold">✓</span>
+                      <span className="text-black font-bold group-hover:text-white transition-colors duration-300">✓</span>
                       <span>Relatórios automáticos</span>
                     </li>
                     <li className="flex items-start gap-3">
-                      <span className="text-primary font-bold">✓</span>
+                      <span className="text-black font-bold group-hover:text-white transition-colors duration-300">✓</span>
                       <span>Backup e monitoramento</span>
                     </li>
                   </ul>
@@ -337,17 +392,30 @@ function App() {
             </div>
 
             <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
-              <Card className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-2 hover:border-primary/20 bg-gradient-to-br from-background to-primary/5">
-                <CardHeader>
-                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
-                    <PaintBrush size={24} weight="duotone" className="text-primary" />
+              <Card className="group hover:shadow-2xl transition-all duration-700 hover:-translate-y-4 hover:rotate-1 border-2 hover:border-primary/30 bg-gradient-to-br from-background to-primary/5 relative overflow-hidden animate-pulse hover:animate-none transform hover:scale-105">
+                {/* Video Background */}
+                <div className="absolute inset-0 z-0">
+                  <video 
+                    autoPlay 
+                    loop 
+                    muted 
+                    playsInline
+                    className="w-full h-full object-cover opacity-80 group-hover:opacity-90 transition-opacity duration-500"
+                  >
+                    <source src={videoCard} type="video/mp4" />
+                  </video>
+                  <div className="absolute inset-0 bg-gradient-to-br from-background/70 to-primary/10 group-hover:from-background/50 transition-all duration-500" />
+                </div>
+                <CardHeader className="relative z-10 transform group-hover:translate-x-2 transition-transform duration-500">
+                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/30 group-hover:rotate-12 group-hover:scale-110 transition-all duration-500">
+                    <PaintBrush size={24} weight="duotone" className="text-primary group-hover:text-white transition-colors duration-300" />
                   </div>
-                  <CardTitle className="text-2xl">Design Gráfico</CardTitle>
+                  <CardTitle className="text-2xl group-hover:text-primary transition-colors duration-300">Design Gráfico</CardTitle>
                   <CardDescription className="text-base">
                     Identidade visual completa para sua marca
                   </CardDescription>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="relative z-10">
                   <ul className="space-y-3">
                     <li className="flex items-start gap-3">
                       <span className="text-primary font-bold">✓</span>
@@ -373,8 +441,21 @@ function App() {
                 </CardContent>
               </Card>
 
-              <Card className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-2 hover:border-primary/20 bg-gradient-to-br from-background to-primary/5">
-                <CardHeader>
+              <Card className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-2 hover:border-primary/20 bg-gradient-to-br from-background to-primary/5 relative overflow-hidden">
+                {/* Video Background */}
+                <div className="absolute inset-0 z-0">
+                  <video 
+                    autoPlay 
+                    loop 
+                    muted 
+                    playsInline
+                    className="w-full h-full object-cover opacity-80"
+                  >
+                    <source src={videoPlayback} type="video/mp4" />
+                  </video>
+                  <div className="absolute inset-0 bg-gradient-to-br from-background/70 to-primary/10" />
+                </div>
+                <CardHeader className="relative z-10">
                   <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
                     <ShareNetwork size={24} weight="duotone" className="text-primary" />
                   </div>
@@ -383,7 +464,7 @@ function App() {
                     Gestão completa da sua presença digital
                   </CardDescription>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="relative z-10">
                   <ul className="space-y-3">
                     <li className="flex items-start gap-3">
                       <span className="text-primary font-bold">✓</span>
@@ -429,7 +510,7 @@ function App() {
             </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-              <Card className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-2 hover:border-primary/20 bg-gradient-to-br from-background to-primary/5 h-full flex flex-col">
+              <Card className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-2 hover:border-primary/20 bg-gradient-to-br from-accent to-black h-full flex flex-col text-white">
                 <CardHeader>
                   <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
                     <TShirt size={24} weight="duotone" className="text-primary" />
@@ -440,32 +521,41 @@ function App() {
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="flex-grow">
-                  <ul className="space-y-2 text-sm">
+                  <ul className="space-y-2 text-sm mb-4">
                     <li className="flex items-start gap-2">
-                      <span className="text-primary font-bold">•</span>
+                      <span className="text-white font-bold">•</span>
                       <span>Camisetas e polos</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <span className="text-primary font-bold">•</span>
+                      <span className="text-white font-bold">•</span>
                       <span>Camisas e bermudas</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <span className="text-primary font-bold">•</span>
+                      <span className="text-white font-bold">•</span>
                       <span>Uniformes profissionais</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <span className="text-primary font-bold">•</span>
+                      <span className="text-white font-bold">•</span>
                       <span>Bonés e chapéus</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <span className="text-primary font-bold">•</span>
+                      <span className="text-white font-bold">•</span>
                       <span>Aventais e jalecos</span>
                     </li>
                   </ul>
+                  
+                  {/* Carrossel de Imagens */}
+                  <div className="relative h-32 rounded-lg overflow-hidden">
+                    <div className="flex animate-slide-infinite">
+                      <img src="https://images.unsplash.com/photo-1503341504253-dff4815485f1?w=300&h=200&fit=crop" alt="Camisetas personalizadas" className="w-full h-32 object-cover flex-shrink-0" />
+                      <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=300&h=200&fit=crop" alt="Uniformes profissionais" className="w-full h-32 object-cover flex-shrink-0" />
+                      <img src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=300&h=200&fit=crop" alt="Bonés personalizados" className="w-full h-32 object-cover flex-shrink-0" />
+                    </div>
+                  </div>
                 </CardContent>
               </Card>
 
-              <Card className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-2 hover:border-primary/20 bg-gradient-to-br from-background to-primary/5 h-full flex flex-col">
+              <Card className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-2 hover:border-primary/20 bg-gradient-to-br from-green-600 to-black h-full flex flex-col text-white">
                 <CardHeader>
                   <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
                     <Coffee size={24} weight="duotone" className="text-primary" />
@@ -476,28 +566,37 @@ function App() {
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="flex-grow">
-                  <ul className="space-y-2 text-sm">
+                  <ul className="space-y-2 text-sm mb-4">
                     <li className="flex items-start gap-2">
-                      <span className="text-primary font-bold">•</span>
+                      <span className="text-white font-bold">•</span>
                       <span>Canecas e copos</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <span className="text-primary font-bold">•</span>
+                      <span className="text-white font-bold">•</span>
                       <span>Squeezes e garrafas</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <span className="text-primary font-bold">•</span>
+                      <span className="text-white font-bold">•</span>
                       <span>Chaveiros e brindes</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <span className="text-primary font-bold">•</span>
+                      <span className="text-white font-bold">•</span>
                       <span>Bolsas e mochilas</span>
                     </li>
                   </ul>
+                  
+                  {/* Carrossel de Imagens */}
+                  <div className="relative h-32 rounded-lg overflow-hidden">
+                    <div className="flex animate-slide-infinite">
+                      <img src="https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=300&h=200&fit=crop" alt="Canecas personalizadas" className="w-full h-32 object-cover flex-shrink-0" />
+                      <img src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=300&h=200&fit=crop" alt="Brindes corporativos" className="w-full h-32 object-cover flex-shrink-0" />
+                      <img src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=300&h=200&fit=crop" alt="Bolsas personalizadas" className="w-full h-32 object-cover flex-shrink-0" />
+                    </div>
+                  </div>
                 </CardContent>
               </Card>
 
-              <Card className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-2 hover:border-accent/20 bg-gradient-to-br from-background to-accent/5 h-full flex flex-col">
+              <Card className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-2 hover:border-accent/20 bg-gradient-to-br from-black to-primary h-full flex flex-col text-white">
                 <CardHeader>
                   <div className="w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center mb-4 group-hover:bg-accent/20 transition-colors">
                     <ShareNetwork size={24} weight="duotone" className="text-accent" />
@@ -508,7 +607,7 @@ function App() {
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="flex-grow">
-                  <ul className="space-y-2 text-sm">
+                  <ul className="space-y-2 text-sm mb-4">
                     <li className="flex items-start gap-2">
                       <span className="text-accent font-bold">•</span>
                       <span>Placas de QR Code personalizadas</span>
@@ -534,6 +633,15 @@ function App() {
                       <span>Design personalizado e exclusivo</span>
                     </li>
                   </ul>
+                  
+                  {/* Carrossel de Imagens */}
+                  <div className="relative h-32 rounded-lg overflow-hidden">
+                    <div className="flex animate-slide-infinite">
+                      <img src="https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=300&h=200&fit=crop" alt="Placas de acrílico" className="w-full h-32 object-cover flex-shrink-0" />
+                      <img src="https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=300&h=200&fit=crop" alt="QR Code personalizado" className="w-full h-32 object-cover flex-shrink-0" />
+                      <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=300&h=200&fit=crop" alt="Cartões NFC" className="w-full h-32 object-cover flex-shrink-0" />
+                    </div>
+                  </div>
                 </CardContent>
               </Card>
             </div>

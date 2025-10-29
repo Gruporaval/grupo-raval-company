@@ -64,6 +64,25 @@
   }
 }
 
+@keyframes slideInfinite {
+  0% {
+    transform: translateX(0);
+  }
+  33.33% {
+    transform: translateX(-100%);
+  }
+  66.66% {
+    transform: translateX(-200%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.animate-slide-infinite {
+  animation: slideInfinite 6s infinite ease-in-out;
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
@@ -140,4 +159,139 @@
   --radius-xl: calc(var(--radius) * 2);
   --radius-2xl: calc(var(--radius) * 3);
   --radius-full: 9999px;
+}
+
+/* Efeitos 3D Avançados - Suavizados */
+.hover\:rotateX-12:hover {
+  transform: rotateX(12deg) scale(1.05) !important;
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+}
+
+.hover\:rotateY-12:hover {
+  transform: rotateY(12deg) scale(1.05) !important;
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+}
+
+.hover\:rotateX--12:hover {
+  transform: rotateX(-12deg) scale(1.05) !important;
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+}
+
+.hover\:rotateY--12:hover {
+  transform: rotateY(-12deg) scale(1.05) !important;
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+}
+
+.hover\:rotateY-15:hover {
+  transform: rotateY(15deg) rotateX(8deg) scale(1.08) !important;
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+}
+
+.hover\:rotateX-8:hover {
+  transform: rotateX(8deg) !important;
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+}
+
+.hover\:scale-110:hover {
+  transform: scale(1.05) !important;
+  transition: transform 0.4s ease-out !important;
+}
+
+.hover\:scale-115:hover {
+  transform: scale(1.08) !important;
+  transition: transform 0.4s ease-out !important;
+}
+
+.hover\:rotateY-180:hover {
+  transform: rotateY(180deg) !important;
+  transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+}
+
+.hover\:rotateX-180:hover {
+  transform: rotateX(180deg) !important;
+  transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+}
+
+.hover\:rotateZ-360:hover {
+  transform: rotateZ(360deg) scale(1.2) !important;
+  transition: transform 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+}
+
+.hover\:shadow-4xl:hover {
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 40px rgba(59, 130, 246, 0.3) !important;
+  transition: box-shadow 0.4s ease-out !important;
+}
+
+.transform-gpu {
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  will-change: transform;
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Animações de Entrada Sequencial */
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-200vw) rotateY(-90deg) scale(0.3);
+    opacity: 0;
+  }
+  50% {
+    transform: translateX(20px) rotateY(-20deg) scale(1.1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateX(0) rotateY(0deg) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInFromTop {
+  0% {
+    transform: translateY(-200vh) rotateX(-90deg) scale(0.3);
+    opacity: 0;
+  }
+  50% {
+    transform: translateY(20px) rotateX(-20deg) scale(1.1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(0) rotateX(0deg) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInFromRight {
+  0% {
+    transform: translateX(200vw) rotateY(90deg) scale(0.3);
+    opacity: 0;
+  }
+  50% {
+    transform: translateX(-20px) rotateY(20deg) scale(1.1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateX(0) rotateY(0deg) scale(1);
+    opacity: 1;
+  }
+}
+
+/* Classes de animação para os cards */
+.card-hidden {
+  opacity: 0;
+  transform: translateX(-200vw) rotateY(-90deg) scale(0.3);
+}
+
+.card-animate-1 {
+  animation: slideInFromLeft 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  animation-delay: 0s;
+}
+
+.card-animate-2 {
+  animation: slideInFromTop 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  animation-delay: 0s;
+}
+
+.card-animate-3 {
+  animation: slideInFromRight 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  animation-delay: 0s;
 }
